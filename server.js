@@ -14,7 +14,10 @@ app.get('/',(req,res)=>{
 })
 let watherHandler =async(req,res)=>{
     let city_name =req.query.searchQuery;
-    let url=`https://api.weatherbit.io/v2.0/forecast/daily?city=${city_name}&key=${process.env.WEATHERBIT_API_KEY}`;
+    let lat =req.query.lat;
+    let lon =req.query.lon;
+
+    let url=`https://api.weatherbit.io/v2.0/forecast/daily?city=${city_name}&key=${process.env.WEATHERBIT_API_KEY}&lat=${lat}&lon=${lon}`;
     let resAxios =await axios.get(url);
     let dataWaather =resAxios.data;
     let wanteddata =dataWaather.data.map(item=>{
